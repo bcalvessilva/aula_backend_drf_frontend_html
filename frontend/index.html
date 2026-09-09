@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Store - E-commerce Consolidado</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Computer Store</h1>
+        <div class="header-status">
+            <span id="user-display" class="user-status">Status: <strong>Não autenticado</strong></span>
+            <span id="contador-carrinho" class="badge">0 itens</span>
+            <button id="btn-login-header" type="button" class="header-action" onclick="abrirModalLogin()">Login</button>
+            <div id="user-menu" class="user-menu" style="display: none;">
+                <span class="user-pill">Usuário: <strong id="logged-username-text">-</strong></span>
+                <button type="button" class="header-action logout-action" onclick="realizarLogout()">Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <main>
+            <section class="card-section">
+                <h2>🛒 Vitrine de Produtos</h2>
+                <div id="grid-produtos" class="grid-produtos">
+                    <p>Carregando produtos do backend Django...</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Sidebar do Carrinho -->
+        <aside class="carrinho-box">
+            <h2 style="color: #FF6B00; margin-bottom: 15px; border-bottom: 2px solid #EEEEEE; padding-bottom: 8px;">Seu Carrinho</h2>
+            <div id="lista-carrinho">
+                <p style="color: #666; font-size: 0.9rem;">Seu carrinho está vazio.</p>
+            </div>
+
+            <div class="resumo-totais">
+                <p>Total: R$ <span id="valor-total">0.00</span></p>
+                <p id="economia-box" class="desconto-texto"></p>
+            </div>
+
+            <button id="btn-checkout" class="btn-checkout" onclick="finalizarCompra()">Finalizar Compra</button>
+        </aside>
+    </div>
+
+    <div id="auth-modal" class="auth-modal hidden" aria-modal="true" role="dialog" aria-labelledby="auth-modal-title">
+        <div class="auth-modal-content">
+            <div class="auth-modal-header">
+                <h2 id="auth-modal-title">🔐 Login</h2>
+                <button type="button" class="close-modal" onclick="fecharModalLogin()" aria-label="Fechar login">×</button>
+            </div>
+            <div class="auth-form-grid-modal">
+                <input type="text" id="auth-username" placeholder="Usuário (ex: admin)" required>
+                <input type="password" id="auth-password" placeholder="Senha" required>
+                <button type="button" onclick="realizarLogin()">Entrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

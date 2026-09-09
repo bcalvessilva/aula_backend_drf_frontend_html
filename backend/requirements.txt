@@ -1,0 +1,10 @@
+djangorestframework
+djangorestframework-simplejwt
+drf-spectacular
+django-cors-headers
+python-dotenv
+# Optional (production)
+gunicorn
+Pillow
+pytest
+pytest-django
