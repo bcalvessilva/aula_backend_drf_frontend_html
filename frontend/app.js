@@ -48,7 +48,7 @@ function fecharModalLogin() {
 
 
 // --------------------------------------------------------------------------   
-// Exercício 1: Implementar a função de logout com limpeza de credenciais e recebimento do JWT.
+// Exercício 2: Implementar a função de logout com limpeza de credenciais e recebimento do JWT.
 // --------------------------------------------------------------------------
 
 function atualizarPainelAuthVisual() {
@@ -91,7 +91,7 @@ async function carregarVitrine() {
         }
 
         produtosCache.forEach(produto => {
-            // Corrigir erro abaixo - Site placeholder não existe mais, então vamos usar outro site de placeholder para imagens
+            // Exercicio 1: Corrigir erro abaixo - Site placeholder não existe mais, então vamos usar outro site de placeholder para imagens
             let imagemUrl = 'https://via.placeholder.com/150';
             if (produto.image) {
                 imagemUrl = produto.image.startsWith('http')
@@ -105,10 +105,11 @@ async function carregarVitrine() {
             card.className = 'card-produto';
             card.innerHTML = `
                 <div>
-                    // Corrigir erro abaixo - Site placeholder não existe mais, então vamos usar outro site de placeholder para imagens
+                    // Exercicio 1: Corrigir erro abaixo - Site placeholder não existe mais, então vamos usar outro site de placeholder para imagens
                     <img src="${imagemUrl}" alt="${produto.name}" onerror="this.src='https://via.placeholder.com/150'">
                     <h3>${produto.name}</h3>
                     <p class="preco">R$ ${precoEfetivo.toFixed(2)}</p>
+                    // Exercicio 3: Trocar por sem estoque quando estoque estiver zerado
                     <p class="estoque">Estoque: ${produto.stock} unid.</p>
                 </div>
                 <button onclick="adicionarAoCarrinho(${produto.id})">Adicionar ao Carrinho</button>
