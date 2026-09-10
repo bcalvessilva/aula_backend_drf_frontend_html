@@ -47,34 +47,4 @@ class TestPermissoesECommerce:
         assert 'image' in response.data
         assert response.data['image'] is not None
 
-    def test_atualizacao_catalogo_cliente_comum_negada(self, regular_client, sample_product):
-        """Garante que um usuário comum receba HTTP 403 ao tentar atualizar um produto."""
-        payload = {
-            "name": "Notebook Gamer Atualizado",
-            "price": "6000.00",
-            "stock": 8
-        }
-        response = regular_client.put(f'/api/products/{sample_product.id}/', payload)
-        assert response.status_code == 403
-
-    def test_remocao_catalogo_cliente_comum_negada(self, regular_client, sample_product):
-        """Garante que um usuário comum receba HTTP 403 ao tentar remover um produto."""
-        response = regular_client.delete(f'/api/products/{sample_product.id}/')
-        assert response.status_code == 403
-
-    def test_atualizacao_catalogo_gerente_permitida(self, gerente_client, sample_product):
-        """Garante que um gerente consiga atualizar um produto com sucesso."""
-        payload = {
-            "name": "Notebook Gamer Atualizado",
-            "price": "6500.00",
-            "stock": 9
-        }
-        response = gerente_client.patch(f'/api/products/{sample_product.id}/', payload)
-        assert response.status_code == 200
-        assert response.data['name'] == "Notebook Gamer Atualizado"
-        assert response.data['price'] == "6500.00"
-
-    def test_remocao_catalogo_gerente_permitida(self, gerente_client, sample_product):
-        """Garante que um gerente consiga remover um produto com sucesso."""
-        response = gerente_client.delete(f'/api/products/{sample_product.id}/')
-        assert response.status_code == 204
+    # 3. Incluir testes para endpoints de pedidos, garantindo que apenas usuários autenticados possam criar pedidos e que usuários não autenticados recebam HTTP 401.

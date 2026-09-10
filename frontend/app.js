@@ -42,65 +42,14 @@ function fecharModalLogin() {
     document.getElementById('auth-password').value = '';
 }
 
-async function realizarLogin() {
-    const usernameInput = document.getElementById('auth-username').value.trim();
-    const passwordInput = document.getElementById('auth-password').value.trim();
+// --------------------------------------------------------------------------
+// 2. INCLUIR LOGIN COM ENVIO DE CREDENCIAIS E RECEBIMENTO DO JWT AQUI
+// --------------------------------------------------------------------------
 
-    if (!usernameInput || !passwordInput) {
-        alert('Por favor, preencha o usuário e a senha!');
-        return;
-    }
 
-    try {
-        const resposta = await fetch(`${API_BASE_URL}/api/token/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: usernameInput,
-                password: passwordInput
-            })
-        });
-
-        const dados = await resposta.json();
-
-        if (resposta.ok && dados.access) {
-            tokenAcesso = dados.access;
-            usuarioLogado = usernameInput;
-
-            localStorage.setItem('computer_jwt_token', tokenAcesso);
-            localStorage.setItem('computer_username', usuarioLogado);
-
-            document.getElementById('auth-password').value = '';
-            atualizarPainelAuthVisual();
-            fecharModalLogin();
-
-            if (loginPendendeAposAutenticacao === 'checkout') {
-                loginPendendeAposAutenticacao = null;
-                finalizarCompra();
-                return;
-            }
-
-            loginPendendeAposAutenticacao = null;
-            alert(`Bem-vindo(a), ${usuarioLogado}! Autenticação realizada com sucesso.`);
-        } else {
-            alert(`Erro no login: ${dados.detail || 'Credenciais inválidas.'}`);
-        }
-    } catch (erro) {
-        alert(`Erro ao conectar com o servidor de autenticação: ${erro.message}`);
-    }
-}
-
-function realizarLogout() {
-    tokenAcesso = null;
-    usuarioLogado = null;
-    loginPendendeAposAutenticacao = null;
-    localStorage.removeItem('computer_jwt_token');
-    localStorage.removeItem('computer_username');
-    atualizarPainelAuthVisual();
-    alert('Sessão encerrada com sucesso.');
-}
+// --------------------------------------------------------------------------   
+// Exercício 1: Implementar a função de logout com limpeza de credenciais e recebimento do JWT.
+// --------------------------------------------------------------------------
 
 function atualizarPainelAuthVisual() {
     const userDisplay = document.getElementById('user-display');
