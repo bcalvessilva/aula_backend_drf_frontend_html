@@ -91,7 +91,7 @@ async function carregarVitrine() {
         }
 
         produtosCache.forEach(produto => {
-            // Resolve URLs relativas e absolutas das imagens físicas de mídia
+            // Corrigir erro abaixo - Site placeholder não existe mais, então vamos usar outro site de placeholder para imagens
             let imagemUrl = 'https://via.placeholder.com/150';
             if (produto.image) {
                 imagemUrl = produto.image.startsWith('http')
@@ -105,6 +105,7 @@ async function carregarVitrine() {
             card.className = 'card-produto';
             card.innerHTML = `
                 <div>
+                    // Corrigir erro abaixo - Site placeholder não existe mais, então vamos usar outro site de placeholder para imagens
                     <img src="${imagemUrl}" alt="${produto.name}" onerror="this.src='https://via.placeholder.com/150'">
                     <h3>${produto.name}</h3>
                     <p class="preco">R$ ${precoEfetivo.toFixed(2)}</p>
