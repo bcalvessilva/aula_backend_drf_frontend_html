@@ -143,7 +143,7 @@ async function carregarVitrine() {
 
         produtosCache.forEach(produto => {
             // Resolve URLs relativas e absolutas das imagens físicas de mídia
-            let imagemUrl = 'https://via.placeholder.com/150';
+            let imagemUrl = 'https://placehold.co/300x300?text=Sem+Foto';
             if (produto.image) {
                 imagemUrl = produto.image.startsWith('http')
                     ? produto.image
@@ -156,10 +156,10 @@ async function carregarVitrine() {
             card.className = 'card-produto';
             card.innerHTML = `
                 <div>
-                    <img src="${imagemUrl}" alt="${produto.name}" onerror="this.src='https://via.placeholder.com/150'">
+                    <img src="${imagemUrl}" alt="${produto.name}" onerror="this.src='https://placehold.co/300x300?text=Sem+Foto'">
                     <h3>${produto.name}</h3>
                     <p class="preco">R$ ${precoEfetivo.toFixed(2)}</p>
-                    <p class="estoque">Estoque: ${produto.stock} unid.</p>
+                    ${produto.stock >= 1 ? `<p class="estoque">Estoque: ${produto.stock} unid.</p>` : '<p class="estoque">Sem estoque</p>'}
                 </div>
                 <button onclick="adicionarAoCarrinho(${produto.id})">Adicionar ao Carrinho</button>
             `;
